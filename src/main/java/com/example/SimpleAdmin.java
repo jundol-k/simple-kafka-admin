@@ -2,6 +2,7 @@ package com.example;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.DescribeConfigsResult;
+import org.apache.kafka.clients.admin.TopicDescription;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.Node;
 import org.apache.kafka.common.config.ConfigResource;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
@@ -34,5 +36,8 @@ public class SimpleAdmin {
                 config.entries().forEach(configEntry -> logger.info(configEntry.name() + "= " + configEntry.value()));
             });
         }
+
+        Map<String, TopicDescription> topicInformation = admin.describeTopics(Collections.singletonList("test")).all().get();
+        logger.info("topicInformation : {}", topicInformation);
     }
 }
