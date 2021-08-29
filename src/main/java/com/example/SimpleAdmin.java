@@ -39,5 +39,7 @@ public class SimpleAdmin {
 
         Map<String, TopicDescription> topicInformation = admin.describeTopics(Collections.singletonList("test")).all().get();
         logger.info("topicInformation : {}", topicInformation);
+
+        admin.close();
     }
 }
